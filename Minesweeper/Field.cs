@@ -4,34 +4,34 @@ namespace Minesweeper
 {
     public static class Field
     {
-        private static bool HasBit(BitField value, BitField flag)
+        private static bool HasBit(this BitField value, BitField flag)
         {
             return (value & flag) != 0;
         }
 
-        public static bool IsMine(BitField value)
+        public static bool IsMine(this BitField value)
         {
-            return HasBit(value, BitField.Mine);
+            return value.HasBit(BitField.Mine);
         }
 
-        public static BitField Reveal(BitField value)
+        public static BitField Reveal(this BitField value)
         {
             return value | BitField.Revealed;
         }
 
-        public static bool IsRevealed(BitField value)
+        public static bool IsRevealed(this BitField value)
         {
-            return HasBit(value, BitField.Revealed);
+            return value.HasBit(BitField.Revealed);
         }
 
-        public static BitField Flag(BitField value)
+        public static BitField Flag(this BitField value)
         {
             return value | BitField.Flagged;
         }
 
-        public static bool IsFlagged(BitField value)
+        public static bool IsFlagged(this BitField value)
         {
-            return HasBit(value, BitField.Flagged);
+            return value.HasBit(BitField.Flagged);
         }
 
         public static BitField FromInt(int value)
@@ -39,7 +39,7 @@ namespace Minesweeper
             return (BitField)(1 << value);
         }
 
-        public static char ToChar(BitField value)
+        public static char ToChar(this BitField value)
         {
             // Remove Revealed and Flagged bit
             switch (value & ~(BitField.Revealed | BitField.Flagged))

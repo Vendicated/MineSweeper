@@ -17,17 +17,18 @@ namespace Minesweeper
             Height = height;
             Mines = mines;
             Map = new BitField[height, width];
-            PlaceMines();
             GenerateMap();
         }
 
         public void GenerateMap()
         {
+            PlaceMines();
+
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    if (Field.IsMine(Map[i, j])) continue;
+                    if (Map[i, j].IsMine()) continue;
 
                     Map[i, j] = Field.FromInt(CalculateMineCount(i, j));
                 }
@@ -45,7 +46,7 @@ namespace Minesweeper
                 {
                     x = random.Next(Height);
                     y = random.Next(Width);
-                } while (Field.IsMine(Map[x, y]));
+                } while (Map[x, y].IsMine());
 
                 Map[x, y] = BitField.Mine;
             }
@@ -64,7 +65,7 @@ namespace Minesweeper
                 {
                     if (j < 0 || j > Width - 1) continue;
 
-                    if (Field.IsMine(Map[i, j])) mineCount++;
+                    if (Map[i, j].IsMine()) mineCount++;
                 }
             }
 
@@ -83,7 +84,7 @@ namespace Minesweeper
 
                 for (int j = 0; j < Width; j++)
                 {
-                    builder.Append(Field.ToChar(Map[i, j]));
+                    builder.Append(Map[i, j].ToChar());
 
                     if (j != Width - 1) builder.Append(" | ");
                 }
