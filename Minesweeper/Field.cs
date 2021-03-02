@@ -41,7 +41,8 @@ namespace Minesweeper
 
         public static char ToChar(BitField value)
         {
-            switch (value)
+            // Remove Revealed and Flagged bit
+            switch (value & ~(BitField.Revealed | BitField.Flagged))
             {
                 case BitField.Zero:
                     return '0';
