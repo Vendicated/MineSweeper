@@ -9,35 +9,14 @@ namespace Minesweeper
             return (value & flag) != 0;
         }
 
-        public static bool IsMine(this BitField value)
-        {
-            return value.HasBit(BitField.Mine);
-        }
+        public static BitField Reveal(this BitField value) => value | BitField.Revealed;
+        public static BitField Flag(this BitField value) => value | BitField.Flagged;
 
-        public static BitField Reveal(this BitField value)
-        {
-            return value | BitField.Revealed;
-        }
+        public static bool IsMine(this BitField value) => value.HasBit(BitField.Mine);
+        public static bool IsRevealed(this BitField value) => value.HasBit(BitField.Revealed);
+        public static bool IsFlagged(this BitField value) => value.HasBit(BitField.Flagged);
 
-        public static bool IsRevealed(this BitField value)
-        {
-            return value.HasBit(BitField.Revealed);
-        }
-
-        public static BitField Flag(this BitField value)
-        {
-            return value | BitField.Flagged;
-        }
-
-        public static bool IsFlagged(this BitField value)
-        {
-            return value.HasBit(BitField.Flagged);
-        }
-
-        public static BitField FromInt(int value)
-        {
-            return (BitField)(1 << value);
-        }
+        public static BitField FromInt(int value) => (BitField)(1 << value);
 
         public static char ToChar(this BitField value)
         {
