@@ -2,7 +2,7 @@
 
 namespace Minesweeper
 {
-    class Program
+    class DeleteMe
     {
         static void Main(string[] args)
         {
